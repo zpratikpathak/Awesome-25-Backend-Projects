@@ -1,0 +1,28 @@
+{
+  "name": "basic-e-commerce-api",
+  "version": "1.0.0",
+  "description": "A RESTful API for a basic e-commerce platform with products, categories, users, cart, and orders",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.13.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.13",
+    "morgan": "^1.10.0",
+    "stripe": "^8.191.0",
+    "multer": "^1.4.3"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
+  }
+}
