@@ -1,13 +1,25 @@
-# Notification Service (Mock Queue)
+# 19-notification-service
 
-A Node.js API simulating a BullMQ job queue for asynchronous notifications.
+## Description
+A backend API project.
 
-## Endpoints
+## Technologies Used
+Node.js
+
+## Prerequisites
+- Node.js (v14+ recommended)
+- npm
+
+## Setup Instructions
+```bash
+npm install
+```
+
+## Run Instructions
+```bash
+npm start
+```
+
+## Example API Endpoints / Usage
 - \`POST /notify\` - Queue notification (\`userId\`, \`message\`)
 - \`GET /status/:id\` - Check notification status
-
-## Setup
-\`\`\`bash
-npm install
-npm start
-\`\`\`
