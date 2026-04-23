@@ -1,25 +1,29 @@
-# 04-markdown-to-html-converter
+# 04 - Markdown to HTML Converter
 
-## Description
-A functional REST API that accepts raw Markdown and converts it to HTML using the `pulldown-cmark` library in Rust.
+A highly concurrent Markdown to HTML converter built with Rust and Axum.
 
-## Technologies Used
-Rust, Axum, Pulldown-cmark
+## Features
+- **Architecture:** Organized with separation of concerns (Routes, Controllers, Services, Models).
+- **Processing:** Efficient Markdown parsing using `pulldown-cmark`.
+- **Logging:** Request tracing using `tracing` and `tower-http`.
+- **Environment:** Configurable via `.env` file using `dotenvy`.
+- **Error Handling:** Graceful rejection of invalid requests.
 
-## Prerequisites
+## Setup
 
+1. Install dependencies and build:
+   ```bash
+   cargo build
+   ```
 
-## Setup Instructions
-```bash
+2. Environment Setup:
+   Copy `.env.example` to `.env`.
 
-```
+3. Run the Server:
+   ```bash
+   cargo run
+   ```
 
-## Run Instructions
-```bash
-
-```
-
-## Example API Endpoints / Usage
-- `POST /api/convert` 
-  - Request body (JSON): `{"markdown": "# Hello World"}`
-  - Response (JSON): `{"html": "<h1>Hello World</h1>\n"}`
+## Endpoints
+- `POST /api/v1/convert`
+  - Body: `{"markdown": "# Hello World"}`

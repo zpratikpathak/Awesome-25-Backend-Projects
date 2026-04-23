@@ -1,34 +1,36 @@
-use axum::{
-    routing::post,
-    Json, Router,
-};
-use pulldown_cmark::{html, Parser};
-use serde::{Deserialize, Serialize};
+mod controllers;
+mod models;
+mod routes;
+mod services;
+mod utils;
 
-#[derive(Deserialize)]
-struct MarkdownRequest {
-    markdown: String,
-}
-
-#[derive(Serialize)]
-struct HtmlResponse {
-    html: String,
-}
-
-async fn convert_markdown(Json(payload): Json<MarkdownRequest>) -> Json<HtmlResponse> {
-    let parser = Parser::new(&payload.markdown);
-    let mut html_output = String::new();
-    html::push_html(&mut html_output, parser);
-
-    Json(HtmlResponse { html: html_output })
-}
+use axum::Router;
+use dotenvy::dotenv;
+use std::net::SocketAddr;
+use tower_http::trace::TraceLayer;
+use tracing::info;
 
 #[tokio::main]
 async fn main() {
-    let app = Router::new()
-        .route("/api/convert", post(convert_markdown));
+    // Load environment variables
+    dotenv().ok();
 
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000").await.unwrap();
-    println!("Markdown to HTML Converter listening on 127.0.0.1:3000");
-    axum::serve(listener, app).await.unwrap();
+    // Initialize structured logging
+    utils::logger::init_logger();
+
+    // App Router with Middleware
+    let app = Router::new()
+        .merge(routes::markdown_routes::create_routes())
+        .layer(TraceLayer::new_for_http());
+
+    // Bind and Serve
+    let port = std::env::var("PORT").unwrap_or_else(|_| "3000".to_string());
+    let addr: SocketAddr = format!("0.0.0.0:{}", port).parse().unwrap();
+    
+    info!("Server listening on {}", addr);
+    
+    axum::Server::bind(&addr)
+        .serve(app.into_make_service())
+        .await
+        .unwrap();
 }
