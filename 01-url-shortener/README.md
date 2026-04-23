@@ -1,25 +1,27 @@
-# 01-url-shortener
+# 01 - URL Shortener
 
-## Description
-A fully functional REST API to shorten long URLs and perform redirection.
+A robust, production-ready URL shortener built with Node.js and Express.
 
-## Technologies Used
-Node.js, Express, Crypto
+## Features
+- **MVC Architecture:** Clean separation of concerns (Routes, Controllers, Services, Models).
+- **Validation:** Strict input validation using Zod.
+- **Logging:** Structured logging using Winston.
+- **Error Handling:** Centralized error handling middleware.
+- **Environment Support:** Configurable via `.env`.
 
-## Prerequisites
-- Node.js (v14+ recommended)
-- npm
+## Setup
 
-## Setup Instructions
-```bash
-npm install
-```
+1. Install dependencies:
+   \`\`\`bash
+   npm install
+   \`\`\`
 
-## Run Instructions
-```bash
-npm start
-```
+2. Environment Configuration:
+   Copy \`.env.example\` to \`.env\` and adjust variables.
 
-## Example API Endpoints / Usage
-- `POST /api/shorten` - Pass JSON body `{"originalUrl": "https://..."}` to receive a shortened URL.
-- `GET /:shortId` - Redirects to the original URL.
+3. Start server:
+   \`\`\`bash
+   npm run start
+   # or for development:
+   npm run dev
+   \`\`\`
