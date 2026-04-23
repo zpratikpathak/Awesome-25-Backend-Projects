@@ -1,24 +1,7 @@
-# 14-image-processing-api
+# 14 Image Processing API
 
-## Description
-A backend API project.
+FastAPI project using Pydantic validation and controller-service layer.
 
-## Technologies Used
-Python
-
-## Prerequisites
-- Python (3.8+ recommended)
-- pip
-
-## Setup Instructions
-```bash
-pip install -r requirements.txt
-```
-
-## Run Instructions
-```bash
-uvicorn main:app --reload
-```
-
-## Example API Endpoints / Usage
-- \`POST /resize?width=200&height=200\` (multipart/form-data with \`file\`)
+## Setup
+1. `pip install -r requirements.txt`
+2. `uvicorn main:app --reload`

@@ -1,16 +1,7 @@
-from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import Response
-from PIL import Image
-import io
+from fastapi import FastAPI
+from app.routes import api_router
+from app.middlewares.error_handler import setup_exception_handlers
 
-app = FastAPI()
-
-@app.post("/resize")
-async def resize_image(width: int, height: int, file: UploadFile = File(...)):
-    contents = await file.read()
-    image = Image.open(io.BytesIO(contents))
-    resized_image = image.resize((width, height))
-    
-    img_byte_arr = io.BytesIO()
-    resized_image.save(img_byte_arr, format=image.format or 'JPEG')
-    return Response(content=img_byte_arr.getvalue(), media_type=f"image/{image.format.lower() if image.format else 'jpeg'}")
+app = FastAPI(title="Image Processing API")
+setup_exception_handlers(app)
+app.include_router(api_router, prefix="/api")
