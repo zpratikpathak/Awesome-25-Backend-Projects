@@ -1,16 +1,28 @@
-# Blog CMS API
+# 11-blog-cms-api
 
-A simple mock Blog CMS API using Express and an in-memory datastore (simulating PostgreSQL with Prisma).
+## Description
+A backend API project.
 
-## Endpoints
+## Technologies Used
+Node.js
+
+## Prerequisites
+- Node.js (v14+ recommended)
+- npm
+
+## Setup Instructions
+```bash
+npm install
+```
+
+## Run Instructions
+```bash
+npm start
+```
+
+## Example API Endpoints / Usage
 - \`GET /posts\` - List posts
 - \`POST /posts\` - Create post
 - \`GET /posts/:id\` - Get post
 - \`PUT /posts/:id\` - Update post
 - \`DELETE /posts/:id\` - Delete post
-
-## Setup
-\`\`\`bash
-npm install
-npm start
-\`\`\`
