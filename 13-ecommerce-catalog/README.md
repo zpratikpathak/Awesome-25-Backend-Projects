@@ -1,12 +1,24 @@
-# E-Commerce Catalog
+# 13-ecommerce-catalog
 
-A Node.js Express API simulating an ElasticSearch product catalog search.
+## Description
+A backend API project.
 
-## Endpoints
-- \`GET /search?q=query\` - Search products
+## Technologies Used
+Node.js
 
-## Setup
-\`\`\`bash
+## Prerequisites
+- Node.js (v14+ recommended)
+- npm
+
+## Setup Instructions
+```bash
 npm install
+```
+
+## Run Instructions
+```bash
 npm start
-\`\`\`
+```
+
+## Example API Endpoints / Usage
+- \`GET /search?q=query\` - Search products
