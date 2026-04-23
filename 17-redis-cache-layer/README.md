@@ -1,10 +1,12 @@
-# Redis Cache Layer
+# Redis Cache Layer (Mock)
 
-## Description
-Caching proxy for slow APIs.
+A Node.js API demonstrating a caching layer (mocked in memory to run without Redis).
 
-## Technologies Used
-Node.js, Redis
+## Endpoints
+- \`GET /data/:id\` - Fetches data, caches it for subsequent requests.
 
-## Setup and Run Instructions
-npm i express redis; node server.js
+## Setup
+\`\`\`bash
+npm install
+npm start
+\`\`\`
