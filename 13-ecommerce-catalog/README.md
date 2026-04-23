@@ -1,24 +1,2 @@
-# 13-ecommerce-catalog
-
-## Description
-A backend API project.
-
-## Technologies Used
-Node.js
-
-## Prerequisites
-- Node.js (v14+ recommended)
-- npm
-
-## Setup Instructions
-```bash
-npm install
-```
-
-## Run Instructions
-```bash
-npm start
-```
-
-## Example API Endpoints / Usage
-- \`GET /search?q=query\` - Search products
+# 13 E-commerce Catalog
+MVC Architecture.

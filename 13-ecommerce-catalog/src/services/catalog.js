@@ -1,0 +1,1 @@
+exports.getAll=()=>[{id:1, name:'Item'}];
