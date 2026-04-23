@@ -1,4 +1,4 @@
-# $proj
+# Real Time Collaborative Editor
 Professional backend implementation.
 ## Architecture
 Multi-file layered architecture.
