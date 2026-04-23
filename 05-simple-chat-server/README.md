@@ -1,24 +1,31 @@
-# 05-simple-chat-server
+# 05 - Simple Chat Server
 
-## Description
-A fully functional real-time chat server using Node.js and Socket.io. Includes a simple built-in HTML client for testing messages.
+A real-time chat server built with Node.js, Express, and Socket.io.
 
-## Technologies Used
-Node.js, Express, Socket.io
+## Features
+- **Architecture:** Layered pattern separating Express logic from Socket.io logic.
+- **Validation:** strict incoming message validation using Zod.
+- **Logging:** Structured logging using Winston.
+- **Error Handling:** Centralized Express and Socket error handling.
+- **Environment Support:** Configurable using `.env`.
 
-## Prerequisites
-- Node.js (v14+ recommended)
-- npm
+## Setup
 
-## Setup Instructions
-```bash
-npm install
-```
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Run Instructions
-```bash
-npm start
-```
+2. Environment Config:
+   Copy `.env.example` to `.env`.
 
-## Example API Endpoints / Usage
-- `GET /` - Default endpoint. Returns status.
+3. Run the Server:
+   ```bash
+   npm run start
+   # Or for dev mode:
+   npm run dev
+   ```
+
+## API
+- `GET /api/health` - Check API health status.
+- WebSocket events: `join`, `message`, `history`, `user_joined`, `user_left`.
