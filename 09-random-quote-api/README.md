@@ -1,24 +1,14 @@
-# 09-random-quote-api
+# 09 Random Quote API
 
-## Description
-A backend API project.
+A Python Flask application featuring multi-file architecture, Pydantic validation, and service layers.
 
-## Technologies Used
-Python
+## Architecture
+- **app/routes**: Endpoints definition
+- **app/controllers**: Request processing
+- **app/services**: Business logic
+- **app/middlewares**: Pydantic validation and error handlers
 
-## Prerequisites
-- Python (3.8+ recommended)
-- pip
-
-## Setup Instructions
-```bash
-pip install -r requirements.txt
-```
-
-## Run Instructions
-```bash
-python app.py
-```
-
-## Example API Endpoints / Usage
-
+## Setup
+1. `pip install -r requirements.txt`
+2. `cp .env.example .env`
+3. `python run.py`
