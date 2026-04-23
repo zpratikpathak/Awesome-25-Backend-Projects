@@ -1,24 +1,14 @@
-# 07-basic-auth-system
+# 07 Basic Auth System
 
-## Description
-A backend API project.
+A layered architecture authentication system with Node.js, JWT, and bcrypt.
 
-## Technologies Used
-Node.js
+## Architecture
+- **src/routes**: Auth endpoints
+- **src/controllers**: HTTP handling
+- **src/services**: Password hashing and JWT generation
+- **src/middleware**: Joi validation and error handling
 
-## Prerequisites
-- Node.js (v14+ recommended)
-- npm
-
-## Setup Instructions
-```bash
-npm install
-```
-
-## Run Instructions
-```bash
-npm start
-```
-
-## Example API Endpoints / Usage
-
+## Setup
+1. `npm install`
+2. `cp .env.example .env`
+3. `npm start`
