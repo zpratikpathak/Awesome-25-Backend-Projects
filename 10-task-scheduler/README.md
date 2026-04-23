@@ -1,31 +1,24 @@
-# 10 - Task Scheduler
+# 10-task-scheduler
 
-A Node.js background task scheduler utilizing `node-cron` to perform scheduled background jobs alongside an Express web server.
+## Description
+A backend API project.
 
-## Tech Stack
-- Node.js
-- Express
-- Node-Cron
+## Technologies Used
+Node.js
 
-## Setup
+## Prerequisites
+- Node.js (v14+ recommended)
+- npm
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Run the server:
-   ```bash
-   npm start
-   ```
+## Setup Instructions
+```bash
+npm install
+```
 
-## Scheduled Tasks
-- **Every minute (`* * * * *`)**: Appends the current timestamp to a local `task.log` file and logs to the console.
-- **Every 5 minutes (`*/5 * * * *`)**: Runs a mock routine representing database cleanup.
+## Run Instructions
+```bash
+npm start
+```
 
-## Endpoints
+## Example API Endpoints / Usage
 
-### `GET /`
-Returns a simple status message.
-
-### `GET /logs`
-Returns the content of the `task.log` file showing the execution history of the every-minute job.
