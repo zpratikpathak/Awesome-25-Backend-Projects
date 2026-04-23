@@ -1,12 +1,24 @@
-# Redis Cache Layer (Mock)
+# 17-redis-cache-layer
 
-A Node.js API demonstrating a caching layer (mocked in memory to run without Redis).
+## Description
+A backend API project.
 
-## Endpoints
-- \`GET /data/:id\` - Fetches data, caches it for subsequent requests.
+## Technologies Used
+Node.js
 
-## Setup
-\`\`\`bash
+## Prerequisites
+- Node.js (v14+ recommended)
+- npm
+
+## Setup Instructions
+```bash
 npm install
+```
+
+## Run Instructions
+```bash
 npm start
-\`\`\`
+```
+
+## Example API Endpoints / Usage
+- \`GET /data/:id\` - Fetches data, caches it for subsequent requests.
