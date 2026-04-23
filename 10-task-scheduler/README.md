@@ -1,24 +1,14 @@
-# 10-task-scheduler
+# 10 Task Scheduler
 
-## Description
-A backend API project.
+Node.js application utilizing `node-cron` with MVC architecture and Zod validation.
 
-## Technologies Used
-Node.js
+## Architecture
+- **src/routes**: API router
+- **src/controllers**: Endpoint handlers
+- **src/services**: Task management and Cron evaluation
+- **src/middleware**: Zod validation
 
-## Prerequisites
-- Node.js (v14+ recommended)
-- npm
-
-## Setup Instructions
-```bash
-npm install
-```
-
-## Run Instructions
-```bash
-npm start
-```
-
-## Example API Endpoints / Usage
-
+## Setup
+1. `npm install`
+2. `cp .env.example .env`
+3. `npm start`
