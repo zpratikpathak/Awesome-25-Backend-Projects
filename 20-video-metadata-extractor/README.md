@@ -1,10 +1,13 @@
 # Video Metadata Extractor
 
-## Description
-Extract metadata.
+A Node.js API that attempts to extract video metadata using \`ffprobe\` via child_process.
 
-## Technologies Used
-Node.js, FFmpeg
+## Endpoints
+- \`POST /metadata\` - Extract metadata (Body: \`{ "videoUrl": "path_or_url" }\`)
 
-## Setup and Run Instructions
-npm i fluent-ffmpeg; node index.js
+## Setup
+\`\`\`bash
+# Requires ffmpeg/ffprobe installed on the system
+npm install
+npm start
+\`\`\`
