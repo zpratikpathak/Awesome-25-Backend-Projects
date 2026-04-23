@@ -1,4 +1,4 @@
-# $proj
+# Microservices Communication
 Professional backend implementation.
 ## Architecture
 Multi-file layered architecture.
