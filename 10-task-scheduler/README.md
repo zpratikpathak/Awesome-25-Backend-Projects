@@ -1,10 +1,31 @@
-# Task Scheduler
+# 10 - Task Scheduler
 
-## Description
-Schedule cron tasks.
+A Node.js background task scheduler utilizing `node-cron` to perform scheduled background jobs alongside an Express web server.
 
-## Technologies Used
-Node.js, node-cron
+## Tech Stack
+- Node.js
+- Express
+- Node-Cron
 
-## Setup and Run Instructions
-npm i node-cron; node index.js
+## Setup
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Run the server:
+   ```bash
+   npm start
+   ```
+
+## Scheduled Tasks
+- **Every minute (`* * * * *`)**: Appends the current timestamp to a local `task.log` file and logs to the console.
+- **Every 5 minutes (`*/5 * * * *`)**: Runs a mock routine representing database cleanup.
+
+## Endpoints
+
+### `GET /`
+Returns a simple status message.
+
+### `GET /logs`
+Returns the content of the `task.log` file showing the execution history of the every-minute job.
