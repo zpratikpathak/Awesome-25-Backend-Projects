@@ -1,12 +1,7 @@
 {
-  "name": "redis-cache-layer",
+  "name": "'$proj'",
   "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2"
-  }
+  "main": "src/index.js",
+  "scripts": { "start": "node src/index.js" },
+  "dependencies": { "express": "^4.18.2", "dotenv": "^16.0.3", "winston": "^3.8.2", "zod": "^3.21.4" }
 }

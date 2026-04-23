@@ -1,24 +1,6 @@
-# 17-redis-cache-layer
-
-## Description
-A backend API project.
-
-## Technologies Used
-Node.js
-
-## Prerequisites
-- Node.js (v14+ recommended)
-- npm
-
-## Setup Instructions
-```bash
-npm install
-```
-
-## Run Instructions
-```bash
-npm start
-```
-
-## Example API Endpoints / Usage
-- \`GET /data/:id\` - Fetches data, caches it for subsequent requests.
+# $proj
+Professional backend implementation.
+## Architecture
+Multi-file layered architecture.
+## Setup
+See env.example and install dependencies.
