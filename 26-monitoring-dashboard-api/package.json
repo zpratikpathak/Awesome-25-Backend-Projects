@@ -1,0 +1,13 @@
+{
+  "name": "monitoring-dashboard-api",
+  "version": "1.0.0",
+  "description": "Monitoring dashboard API with Prometheus",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "prom-client": "^15.0.0"
+  }
+}
