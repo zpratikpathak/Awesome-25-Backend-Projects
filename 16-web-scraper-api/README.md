@@ -1,10 +1,12 @@
 # Web Scraper API
 
-## Description
-Scrape data from websites on demand.
+An Express API that scrapes HTML using Cheerio and Axios.
 
-## Technologies Used
-Node.js, Cheerio
+## Endpoints
+- \`POST /scrape\` (Body: \`{ "url": "https://example.com", "selector": "h1" }\`)
 
-## Setup and Run Instructions
-npm i express cheerio axios; node index.js
+## Setup
+\`\`\`bash
+npm install
+npm start
+\`\`\`
