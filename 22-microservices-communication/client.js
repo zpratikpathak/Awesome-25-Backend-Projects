@@ -12,16 +12,16 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 });
 const greetingProto = grpc.loadPackageDefinition(packageDefinition).greeting;
 
-function sayHello(call, callback) {
-  callback(null, { message: 'Hello ' + call.request.name });
-}
-
 function main() {
-  const server = new grpc.Server();
-  server.addService(greetingProto.Greeter.service, { sayHello: sayHello });
-  const port = '50051';
-  server.bindAsync(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure(), () => {
-    console.log(`Server running at http://0.0.0.0:${port}`);
+  const client = new greetingProto.Greeter('localhost:50051', grpc.credentials.createInsecure());
+  const user = process.argv.length >= 3 ? process.argv[2] : 'World';
+  
+  client.sayHello({ name: user }, function(err, response) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log('Greeting:', response.message);
   });
 }
 
