@@ -1,13 +1,24 @@
-# Discord Bot Stats
+# 15-discord-bot-stats
 
-A python discord.py bot that responds with server stats.
+## Description
+A backend API project.
 
-## Commands
-- \`!stats\` - Replies with member count.
+## Technologies Used
+Python
 
-## Setup
-\`\`\`bash
+## Prerequisites
+- Python (3.8+ recommended)
+- pip
+
+## Setup Instructions
+```bash
 pip install -r requirements.txt
-export DISCORD_TOKEN="your-token"
-python bot.py
-\`\`\`
+```
+
+## Run Instructions
+```bash
+python app.py
+```
+
+## Example API Endpoints / Usage
+- `GET /` - Default endpoint. Returns status.
