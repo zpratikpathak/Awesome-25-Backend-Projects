@@ -1,10 +1,11 @@
-# Real-time Polling App
+# Real-Time Polling App
 
-## Description
-Create and vote on polls in real-time.
+A basic Go app with WebSockets (using gorilla/websocket) to handle real-time polling updates.
 
-## Technologies Used
-Go, Redis, WebSockets
-
-## Setup and Run Instructions
+## Setup
+\`\`\`bash
+go mod tidy
 go run main.go
+\`\`\`
+
+Connect to \`ws://localhost:8080/ws\`
