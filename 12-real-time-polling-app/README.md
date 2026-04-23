@@ -1,11 +1,23 @@
-# Real-Time Polling App
+# 12-real-time-polling-app
 
-A basic Go app with WebSockets (using gorilla/websocket) to handle real-time polling updates.
+## Description
+A backend API project.
 
-## Setup
-\`\`\`bash
+## Technologies Used
+Go
+
+## Prerequisites
+- Go (1.16+ recommended)
+
+## Setup Instructions
+```bash
 go mod tidy
-go run main.go
-\`\`\`
+```
 
-Connect to \`ws://localhost:8080/ws\`
+## Run Instructions
+```bash
+go run main.go
+```
+
+## Example API Endpoints / Usage
+- `GET /` - Default endpoint. Returns status.
