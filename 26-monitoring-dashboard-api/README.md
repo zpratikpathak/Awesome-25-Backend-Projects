@@ -1,4 +1,4 @@
-# $proj
+# Monitoring Dashboard Api
 Professional backend implementation.
 ## Architecture
 Multi-file layered architecture.
