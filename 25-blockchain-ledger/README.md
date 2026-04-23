@@ -1,4 +1,4 @@
-# $proj
+# Blockchain Ledger
 Professional backend implementation.
 ## Architecture
 Multi-file layered architecture.
