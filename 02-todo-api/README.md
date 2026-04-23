@@ -1,28 +1,31 @@
-# 02-todo-api
+# 02 - Todo API
 
-## Description
-A fully functional RESTful API for managing tasks (CRUD operations) using an in-memory list.
+A production-ready Todo API built with Python and FastAPI.
 
-## Technologies Used
-Python, FastAPI, Pydantic
+## Features
+- **Architecture:** Layered architectural pattern (Routes, Controllers, Services, Models).
+- **Validation:** Robust data validation and serialization using Pydantic.
+- **Logging:** Advanced logging using Loguru.
+- **Error Handling:** Global exception handling for internal and validation errors.
+- **Environment Support:** Managed configuration with `python-dotenv`.
 
-## Prerequisites
-- Python (3.8+ recommended)
-- pip
+## Setup
 
-## Setup Instructions
-```bash
-pip install -r requirements.txt
-```
+1. Create a virtual environment and install dependencies:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
 
-## Run Instructions
-```bash
-uvicorn main:app --reload
-```
+2. Environment Setup:
+   Copy `.env.example` to `.env`.
 
-## Example API Endpoints / Usage
-- `GET /todos` - List all tasks
-- `GET /todos/{id}` - Get a specific task
-- `POST /todos` - Create a new task
-- `PUT /todos/{id}` - Update a task
-- `DELETE /todos/{id}` - Delete a task
+3. Run the Server:
+   ```bash
+   python main.py
+   # Or using uvicorn:
+   uvicorn main:app --reload
+   ```
+
+Swagger docs are automatically available at `http://127.0.0.1:8000/docs`.

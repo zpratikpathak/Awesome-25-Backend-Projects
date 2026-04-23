@@ -1,58 +1,29 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from typing import List, Optional
+import os
+from dotenv import load_dotenv
+from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
+from src.routes.todo_routes import router as todo_router
+from src.utils.logger import logger
+from src.middlewares.error_handler import validation_exception_handler, global_exception_handler
 
-app = FastAPI(title="Todo API")
+# Load env variables
+load_dotenv()
 
-class TodoItem(BaseModel):
-    title: str
-    description: Optional[str] = None
-    completed: bool = False
+app = FastAPI(title="Todo API", description="A robust Todo API built with FastAPI")
 
-class TodoItemResponse(TodoItem):
-    id: int
+# Add Exception Handlers
+app.add_exception_handler(RequestValidationError, validation_exception_handler)
+app.add_exception_handler(Exception, global_exception_handler)
 
-todo_db = []
-current_id = 1
+# Include Routers
+app.include_router(todo_router)
 
-@app.get("/todos", response_model=List[TodoItemResponse])
-def get_todos():
-    return todo_db
+@app.on_event("startup")
+async def startup_event():
+    env = os.getenv("ENVIRONMENT", "development")
+    logger.info(f"Starting Todo API in {env} mode")
 
-@app.get("/todos/{todo_id}", response_model=TodoItemResponse)
-def get_todo(todo_id: int):
-    for item in todo_db:
-        if item["id"] == todo_id:
-            return item
-    raise HTTPException(status_code=404, detail="Todo not found")
-
-@app.post("/todos", response_model=TodoItemResponse, status_code=201)
-def create_todo(todo: TodoItem):
-    global current_id
-    new_todo = todo.model_dump()
-    new_todo["id"] = current_id
-    current_id += 1
-    todo_db.append(new_todo)
-    return new_todo
-
-@app.put("/todos/{todo_id}", response_model=TodoItemResponse)
-def update_todo(todo_id: int, updated_todo: TodoItem):
-    for index, item in enumerate(todo_db):
-        if item["id"] == todo_id:
-            updated_data = updated_todo.model_dump()
-            updated_data["id"] = todo_id
-            todo_db[index] = updated_data
-            return updated_data
-    raise HTTPException(status_code=404, detail="Todo not found")
-
-@app.delete("/todos/{todo_id}", status_code=204)
-def delete_todo(todo_id: int):
-    for index, item in enumerate(todo_db):
-        if item["id"] == todo_id:
-            del todo_db[index]
-            return
-    raise HTTPException(status_code=404, detail="Todo not found")
-
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to Todo API"}
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
