@@ -1,4 +1,4 @@
-# $proj
+# Web Scraper Api
 Professional backend implementation.
 ## Architecture
 Multi-file layered architecture.
