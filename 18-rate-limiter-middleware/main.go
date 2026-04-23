@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 	"sync"
-	"time"
+	
 
 	"golang.org/x/time/rate"
 )
@@ -46,6 +46,6 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", helloHandler)
 
-	log.Println("Server running on :8080")
-	log.Fatal(http.ListenAndServe(":8080", rateLimit(mux)))
+	log.Println("Server running on :8018")
+	log.Fatal(http.ListenAndServe(":8018", rateLimit(mux)))
 }

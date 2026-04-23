@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+dist/
+build/
+.env
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+
+# Go
+bin/
+*.exe
+*.test
+*.out
+
+# Rust
+target/
+**/*.rs.bk
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+.mvn/

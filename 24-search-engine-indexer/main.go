@@ -100,8 +100,8 @@ func main() {
 	http.HandleFunc("/index", handleIndex)
 	http.HandleFunc("/search", handleSearch)
 
-	fmt.Println("Search engine indexer running on :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	fmt.Println("Search engine indexer running on :8024")
+	log.Fatal(http.ListenAndServe(":8024", nil))
 }
 
 func handleIndex(w http.ResponseWriter, r *http.Request) {
