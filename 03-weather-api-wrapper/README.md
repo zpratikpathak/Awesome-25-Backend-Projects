@@ -1,24 +1,28 @@
-# 03-weather-api-wrapper
+# 03 - Weather API Wrapper
 
-## Description
-A functional wrapper around the Open-Meteo public API, providing a simplified JSON response for current weather given latitude and longitude coordinates.
+A robust Weather API wrapper built with Go and the Gin framework.
 
-## Technologies Used
-Go (Standard Library)
+## Features
+- **Architecture:** Layered pattern (Routes, Controllers, Services, Models).
+- **Validation:** Strict input validation using `go-playground/validator`.
+- **Logging:** Structured logging using `logrus`.
+- **Error Handling:** Centralized error handling middleware.
+- **Environment Support:** Configuration via `godotenv`.
 
-## Prerequisites
-- Go (1.16+ recommended)
+## Setup
 
-## Setup Instructions
-```bash
-go mod tidy
-```
+1. Install dependencies:
+   ```bash
+   go mod tidy
+   ```
 
-## Run Instructions
-```bash
-go run main.go
-```
+2. Environment Setup:
+   Copy `.env.example` to `.env` and add your OpenWeather API key.
 
-## Example API Endpoints / Usage
-- `GET /api/weather?lat={latitude}&lon={longitude}`
-  Example: `/api/weather?lat=52.52&lon=13.41` (Berlin)
+3. Run the Server:
+   ```bash
+   go run main.go
+   ```
+
+## Endpoints
+- `GET /api/v1/weather?city=London`
