@@ -1,10 +1,13 @@
-# Notification Service
+# Notification Service (Mock Queue)
 
-## Description
-Background job processing.
+A Node.js API simulating a BullMQ job queue for asynchronous notifications.
 
-## Technologies Used
-Node.js, BullMQ
+## Endpoints
+- \`POST /notify\` - Queue notification (\`userId\`, \`message\`)
+- \`GET /status/:id\` - Check notification status
 
-## Setup and Run Instructions
-npm i bullmq ioredis; node worker.js
+## Setup
+\`\`\`bash
+npm install
+npm start
+\`\`\`
