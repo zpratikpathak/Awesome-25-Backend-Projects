@@ -1,4 +1,4 @@
-# $proj
+# Rate Limiter Middleware
 Professional backend implementation.
 ## Architecture
 Multi-file layered architecture.
