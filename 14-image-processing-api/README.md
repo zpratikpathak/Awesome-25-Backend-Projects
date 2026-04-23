@@ -1,10 +1,12 @@
 # Image Processing API
 
-## Description
-Resize and crop images.
+A FastAPI service to resize images using Pillow.
 
-## Technologies Used
-Python, FastAPI
+## Endpoints
+- \`POST /resize?width=200&height=200\` (multipart/form-data with \`file\`)
 
-## Setup and Run Instructions
-pip install fastapi uvicorn Pillow; uvicorn main:app
+## Setup
+\`\`\`bash
+pip install -r requirements.txt
+uvicorn main:app --reload
+\`\`\`
