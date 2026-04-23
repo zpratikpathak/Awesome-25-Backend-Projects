@@ -1,28 +1,26 @@
-# 25 - Blockchain Ledger
+# 25-blockchain-ledger
 
-A simple blockchain ledger implemented in Python with Flask, featuring a basic Proof of Work system.
+## Description
+A backend API project.
 
-## Architecture
-- `blockchain.py` exposes a Flask API.
-- The `Blockchain` class manages the chain, validates proof of work (requires 4 leading zeroes in the SHA-256 hash), and adds transactions.
-- Provides endpoints to `/mine` blocks, add `/transactions/new`, and view the `/chain`.
+## Technologies Used
+Python
 
-## Setup
+## Prerequisites
+- Python (3.8+ recommended)
+- pip
 
-```sh
-python -m venv venv
-source venv/bin/activate
+## Setup Instructions
+```bash
 pip install -r requirements.txt
 ```
 
-## Running
-
-```sh
-python blockchain.py
+## Run Instructions
+```bash
+python main.py
 ```
 
-## Usage
-
+## Example API Endpoints / Usage
 View the chain:
 ```sh
 curl http://localhost:5000/chain
