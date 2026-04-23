@@ -1,24 +1,17 @@
-# 06-file-metadata-microservice
+# 06 File Metadata Microservice
 
-## Description
-A backend API project.
+A professional REST API to upload files and retrieve their metadata.
+Built with Node.js, Express, and Multer.
 
-## Technologies Used
-Node.js
+## Architecture
+- **src/app.js**: App configuration and middleware
+- **src/routes**: API Route definitions
+- **src/controllers**: Request handlers
+- **src/services**: Business logic
+- **src/middleware**: Upload and Error handling
+- **src/utils**: Logger
 
-## Prerequisites
-- Node.js (v14+ recommended)
-- npm
-
-## Setup Instructions
-```bash
-npm install
-```
-
-## Run Instructions
-```bash
-npm start
-```
-
-## Example API Endpoints / Usage
-
+## Setup
+1. `npm install`
+2. `cp .env.example .env`
+3. `npm start`
