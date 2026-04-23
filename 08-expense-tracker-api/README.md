@@ -1,23 +1,12 @@
-# 08-expense-tracker-api
+# 08 Expense Tracker API
 
-## Description
-A backend API project.
+A Spring Boot application structured with Layered Architecture (Controller, Service, Model, Exception Handling).
 
-## Technologies Used
-Unknown
+## Features
+- Controller-Service-Repository pattern
+- Centralized exception handling (`@ControllerAdvice`)
+- Bean Validation (`@Valid`)
 
-## Prerequisites
-
-
-## Setup Instructions
-```bash
-
-```
-
-## Run Instructions
-```bash
-
-```
-
-## Example API Endpoints / Usage
-
+## Setup
+1. Build: `mvn clean install`
+2. Run: `mvn spring-boot:run`
