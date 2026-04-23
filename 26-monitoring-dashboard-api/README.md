@@ -1,26 +1,26 @@
-# 26 - Monitoring Dashboard API
+# 26-monitoring-dashboard-api
 
-A Node.js backend using Express and `prom-client` to expose application metrics to Prometheus.
+## Description
+A backend API project.
 
-## Architecture
-- Express application tracking HTTP request durations using a Prometheus Histogram (`http_request_duration_seconds`).
-- Exposes standard Node.js metrics (CPU, memory, Event Loop lag) via `prom-client`'s `collectDefaultMetrics`.
-- `/metrics` endpoint to be scraped by a Prometheus server.
+## Technologies Used
+Node.js
 
-## Setup
+## Prerequisites
+- Node.js (v14+ recommended)
+- npm
 
-```sh
+## Setup Instructions
+```bash
 npm install
 ```
 
-## Running
-
-```sh
+## Run Instructions
+```bash
 npm start
 ```
 
-## Usage
-
+## Example API Endpoints / Usage
 Hit some endpoints to generate metrics:
 ```sh
 curl http://localhost:8080/api/hello
