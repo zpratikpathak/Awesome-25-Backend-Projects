@@ -1,36 +1,23 @@
-# 21 - Distributed Key-Value Store
+# 21-distributed-key-value-store
 
-A simple distributed key-value store built in Go, demonstrating a basic replication strategy.
+## Description
+A backend API project.
 
-## Architecture
-- Nodes store data in-memory using thread-safe maps.
-- Writes (`/set`) received by a node are replicated asynchronously to configured peer nodes via an internal endpoint (`/internal/set`).
-- Reads (`/get`) serve data directly from the local node.
+## Technologies Used
+Go
 
-## Setup & Run
+## Prerequisites
+- Go (1.16+ recommended)
 
-Initialize the module:
-```sh
-go mod init distributed-kv
+## Setup Instructions
+```bash
 go mod tidy
 ```
 
-Run Node 1:
-```sh
-go run main.go -port 8080 -peers http://localhost:8081
+## Run Instructions
+```bash
+go run main.go
 ```
 
-Run Node 2:
-```sh
-go run main.go -port 8081 -peers http://localhost:8080
-```
-
-Set a key in Node 1:
-```sh
-curl -X POST http://localhost:8080/set -d '{"key":"foo","value":"bar"}'
-```
-
-Get the key from Node 2 (it will be replicated):
-```sh
-curl http://localhost:8081/get?key=foo
-```
+## Example API Endpoints / Usage
+- `GET /` - Default endpoint. Returns status.
