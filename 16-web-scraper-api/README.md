@@ -1,12 +1,24 @@
-# Web Scraper API
+# 16-web-scraper-api
 
-An Express API that scrapes HTML using Cheerio and Axios.
+## Description
+A backend API project.
 
-## Endpoints
-- \`POST /scrape\` (Body: \`{ "url": "https://example.com", "selector": "h1" }\`)
+## Technologies Used
+Node.js
 
-## Setup
-\`\`\`bash
+## Prerequisites
+- Node.js (v14+ recommended)
+- npm
+
+## Setup Instructions
+```bash
 npm install
+```
+
+## Run Instructions
+```bash
 npm start
-\`\`\`
+```
+
+## Example API Endpoints / Usage
+- \`POST /scrape\` (Body: \`{ "url": "https://example.com", "selector": "h1" }\`)
