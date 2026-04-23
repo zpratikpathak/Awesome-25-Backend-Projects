@@ -1,10 +1,17 @@
 # Simple Chat Server
 
 ## Description
-Real-time chat server.
+A fully functional real-time chat server using Node.js and Socket.io. Includes a simple built-in HTML client for testing messages.
 
 ## Technologies Used
-Node.js, Socket.io
+Node.js, Express, Socket.io
+
+## Features
+- Real-time message broadcasting
+- User connection/disconnection notifications
+- Built-in web client interface for testing
 
 ## Setup and Run Instructions
-npm i express socket.io; node server.js
+1. Install dependencies: `npm install`
+2. Start server: `npm start`
+3. Open `http://localhost:3000` in multiple browser tabs to test the real-time chat.
