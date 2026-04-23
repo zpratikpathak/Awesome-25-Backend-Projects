@@ -1,46 +1,23 @@
-# 08 - Expense Tracker API
+# 08-expense-tracker-api
 
-A Java Spring Boot API for tracking personal expenses, utilizing an in-memory H2 Database.
+## Description
+A backend API project.
 
-## Tech Stack
-- Java 17+
-- Spring Boot (Web, Data JPA)
-- H2 Database (In-Memory)
-- Maven
+## Technologies Used
+Unknown
 
-## Setup
+## Prerequisites
 
-1. Build the project:
-   ```bash
-   mvn clean install
-   ```
-2. Run the application:
-   ```bash
-   mvn spring-boot:run
-   ```
 
-## Endpoints
+## Setup Instructions
+```bash
 
-### `GET /api/expenses`
-Retrieves all expenses.
-
-### `POST /api/expenses`
-Create a new expense.
-**Body:**
-```json
-{
-  "title": "Groceries",
-  "amount": 50.00,
-  "category": "Food",
-  "date": "2023-10-01"
-}
 ```
 
-### `DELETE /api/expenses/{id}`
-Delete an expense by ID.
+## Run Instructions
+```bash
 
-### H2 Console
-Available at: `http://localhost:8080/h2-console`
-- **JDBC URL:** `jdbc:h2:mem:testdb`
-- **User:** `sa`
-- **Password:** *(empty)*
+```
+
+## Example API Endpoints / Usage
+
