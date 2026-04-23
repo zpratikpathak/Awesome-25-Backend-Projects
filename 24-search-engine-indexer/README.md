@@ -1,22 +1,25 @@
-# 24 - Search Engine Indexer
+# 24-search-engine-indexer
 
-A simple search engine indexer implemented in Go using an inverted index.
+## Description
+A backend API project.
 
-## Architecture
-- Exposes an HTTP API for indexing documents (`POST /index`) and searching (`GET /search`).
-- Maintains an in-memory inverted index mapping tokens (words) to document IDs.
-- Search performs a simple AND intersection across tokens.
+## Technologies Used
+Go
 
-## Setup & Run
+## Prerequisites
+- Go (1.16+ recommended)
 
-```sh
-go mod init search-indexer
+## Setup Instructions
+```bash
 go mod tidy
+```
+
+## Run Instructions
+```bash
 go run main.go
 ```
 
-## Usage
-
+## Example API Endpoints / Usage
 Index documents:
 ```sh
 curl -X POST http://localhost:8080/index -d '{"id":"1", "content":"the quick brown fox"}'
