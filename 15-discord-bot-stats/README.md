@@ -1,10 +1,13 @@
-# Discord Bot for Stats
+# Discord Bot Stats
 
-## Description
-Bot for displaying server statistics.
+A python discord.py bot that responds with server stats.
 
-## Technologies Used
-Python, discord.py
+## Commands
+- \`!stats\` - Replies with member count.
 
-## Setup and Run Instructions
-pip install discord.py; python bot.py
+## Setup
+\`\`\`bash
+pip install -r requirements.txt
+export DISCORD_TOKEN="your-token"
+python bot.py
+\`\`\`
