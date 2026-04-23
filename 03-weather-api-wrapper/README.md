@@ -1,4 +1,4 @@
-# Weather API Wrapper
+# 03-weather-api-wrapper
 
 ## Description
 A functional wrapper around the Open-Meteo public API, providing a simplified JSON response for current weather given latitude and longitude coordinates.
@@ -6,10 +6,19 @@ A functional wrapper around the Open-Meteo public API, providing a simplified JS
 ## Technologies Used
 Go (Standard Library)
 
-## Endpoints
+## Prerequisites
+- Go (1.16+ recommended)
+
+## Setup Instructions
+```bash
+go mod tidy
+```
+
+## Run Instructions
+```bash
+go run main.go
+```
+
+## Example API Endpoints / Usage
 - `GET /api/weather?lat={latitude}&lon={longitude}`
   Example: `/api/weather?lat=52.52&lon=13.41` (Berlin)
-
-## Setup and Run Instructions
-1. Run the application: `go run main.go`
-2. Server listens on port 8080.
