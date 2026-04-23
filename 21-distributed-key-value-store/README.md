@@ -1,4 +1,4 @@
-# $proj
+# Distributed Key Value Store
 Professional backend implementation.
 ## Architecture
 Multi-file layered architecture.
