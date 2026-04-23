@@ -1,25 +1,24 @@
-# 22 - Microservices Communication
+# 22-microservices-communication
 
-A basic Node.js application demonstrating microservices communication using gRPC.
+## Description
+A backend API project.
 
-## Architecture
-- A gRPC server (`server.js`) that implements a `Greeter` service defined in `proto/greeting.proto`.
-- A gRPC client (`client.js`) that calls the `sayHello` RPC.
+## Technologies Used
+Node.js
 
-## Setup
+## Prerequisites
+- Node.js (v14+ recommended)
+- npm
 
-```sh
+## Setup Instructions
+```bash
 npm install
 ```
 
-## Running
-
-1. Start the gRPC server:
-```sh
-npm run start-server
+## Run Instructions
+```bash
+npm start
 ```
 
-2. In another terminal, run the client:
-```sh
-npm run start-client "Alice"
-```
+## Example API Endpoints / Usage
+- `GET /` - Default endpoint. Returns status.
