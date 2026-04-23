@@ -1,11 +1,23 @@
-# Rate Limiter Middleware
+# 18-rate-limiter-middleware
 
-A Go HTTP server with IP-based rate limiting middleware using \`golang.org/x/time/rate\`.
+## Description
+A backend API project.
 
-## Setup
-\`\`\`bash
+## Technologies Used
+Go
+
+## Prerequisites
+- Go (1.16+ recommended)
+
+## Setup Instructions
+```bash
 go mod tidy
-go run main.go
-\`\`\`
+```
 
-Test with \`curl http://localhost:8080/\` repeatedly.
+## Run Instructions
+```bash
+go run main.go
+```
+
+## Example API Endpoints / Usage
+- `GET /` - Default endpoint. Returns status.
