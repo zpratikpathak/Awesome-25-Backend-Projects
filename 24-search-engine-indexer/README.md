@@ -1,4 +1,4 @@
-# $proj
+# Search Engine Indexer
 Professional backend implementation.
 ## Architecture
 Multi-file layered architecture.
