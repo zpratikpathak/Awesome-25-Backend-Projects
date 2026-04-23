@@ -1,92 +1,31 @@
-# Awesome 25+ Backend Projects 🚀
+# Awesome Backend Projects
 
-A curated collection of backend projects to help you learn and improve your backend development skills. Projects are categorized by difficulty level to help you progress systematically.
+A collection of 26 backend projects covering various technologies and use cases.
 
-## 🌟 Beginner Level Projects
-1. URL Shortener - Create and manage shortened URLs with click tracking and analytics
-2. Todo API - Simple task management system with CRUD operations and user authentication
-3. Weather API Integration - Real-time weather data fetching and caching system
-4. File Upload Service - Secure file storage system with format validation and size limits
-5. Basic Authentication System - User registration and login with JWT authentication
-6. Note Taking API - Personal notes management with categories and search functionality
-7. Basic E-commerce API - Product catalog with shopping cart and order management
-8. Chat Application Backend - Real-time messaging system with WebSocket implementation
-
-## 🎯 Intermediate Level Projects
-9. Social Media API - Full-featured social platform with posts, comments, and user interactions
-10. Job Board API - Job listing platform with search, apply, and company profiles
-11. Payment Gateway Integration - Multi-payment provider system with transaction handling
-12. Restaurant Ordering System - Food ordering platform with real-time order tracking
-13. Book Library Management - Digital library system with lending and reservation features
-14. Task Scheduling System - Automated task scheduler with email notifications
-15. Content Management System API - Dynamic content handler with version control
-16. Event Management System - Event booking platform with ticket management
-
-## 🎓 Expert Level Projects
-17. E-learning Platform Backend - Complete education system with course management and progress tracking
-18. Real-time Analytics System - High-performance data processing and visualization platform
-19. Distributed Cache System - Scalable caching solution with data consistency management
-20. Multi-tenant SaaS Platform - Secure multi-organization system with resource isolation
-21. IoT Device Management Platform - IoT device monitoring and data collection system
-22. Microservices-based E-commerce - Distributed shopping platform with service orchestration
-23. CI/CD Pipeline Manager - Automated deployment system with build and test integration
-24. Distributed Task Queue - Scalable job processing system with worker management
-25. Real-time Collaboration Tool - Multi-user document editing with conflict resolution
-
-## 🤝 How to Contribute
-
-We welcome contributions from developers of all skill levels! Here's how you can contribute:
-
-### Getting Started
-
-1. Fork the repository
-2. Clone your forked repository
-3. Create a new branch for your feature (`git checkout -b feature/YourFeature`)
-
-### Making Changes
-
-1. Choose a project from the list or propose a new one
-2. Create a new directory with your project name
-3. Include:
-   - Complete source code
-   - Detailed README.md
-   - API documentation
-   - Setup instructions
-   - Dependencies list
-   - Example usage
-
-### Code Guidelines
-
-- Follow clean code principles
-- Include appropriate comments
-- Write comprehensive tests
-- Follow the project's coding style
-- Include error handling
-- Add logging where appropriate
-
-### Documentation
-
-- Clear project description
-- Setup instructions
-- API documentation
-- Environment variables list
-- Example requests/responses
-- Deployment guide
-
-### Submitting Changes
-
-1. Commit your changes (`git commit -m 'Add some feature'`)
-2. Push to your branch (`git push origin feature/YourFeature`)
-3. Open a Pull Request
-
-### Pull Request Guidelines
-
-- Describe your changes in detail
-- Link any related issues
-- Ensure all tests pass
-- Follow the pull request template
-- Be open to feedback and discussions
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Projects
+1. [URL Shortener](./01-url-shortener)
+2. [To-do List API](./02-todo-api)
+3. [Weather API Wrapper](./03-weather-api-wrapper)
+4. [Markdown to HTML Converter](./04-markdown-to-html-converter)
+5. [Simple Chat Server](./05-simple-chat-server)
+6. [File Metadata Microservice](./06-file-metadata-microservice)
+7. [Basic Auth System](./07-basic-auth-system)
+8. [Expense Tracker API](./08-expense-tracker-api)
+9. [Random Quote API](./09-random-quote-api)
+10. [Task Scheduler](./10-task-scheduler)
+11. [Blog CMS API](./11-blog-cms-api)
+12. [Real-time Polling App](./12-real-time-polling-app)
+13. [E-commerce Catalog](./13-ecommerce-catalog)
+14. [Image Processing API](./14-image-processing-api)
+15. [Discord Bot for Stats](./15-discord-bot-stats)
+16. [Web Scraper API](./16-web-scraper-api)
+17. [Redis Cache Layer](./17-redis-cache-layer)
+18. [Rate Limiter Middleware](./18-rate-limiter-middleware)
+19. [Notification Service](./19-notification-service)
+20. [Video Metadata Extractor](./20-video-metadata-extractor)
+21. [Distributed Key-Value Store](./21-distributed-key-value-store)
+22. [Microservices Communication](./22-microservices-communication)
+23. [Real-time Collaborative Editor](./23-real-time-collaborative-editor)
+24. [Search Engine Indexer](./24-search-engine-indexer)
+25. [Blockchain Ledger](./25-blockchain-ledger)
+26. [Monitoring Dashboard API](./26-monitoring-dashboard-api)
