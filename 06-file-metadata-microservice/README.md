@@ -1,33 +1,24 @@
-# 06 - File Metadata Microservice
+# 06-file-metadata-microservice
 
-A simple Node.js microservice that accepts file uploads and returns their metadata (name, type, and size in bytes).
+## Description
+A backend API project.
 
-## Tech Stack
-- Node.js
-- Express
-- Multer (for handling `multipart/form-data`)
+## Technologies Used
+Node.js
 
-## Setup
+## Prerequisites
+- Node.js (v14+ recommended)
+- npm
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Run the server:
-   ```bash
-   npm start
-   ```
-
-## Endpoints
-
-### `POST /api/fileanalyse`
-Upload a file using form-data with the field name `upfile`.
-
-**Response:**
-```json
-{
-  "name": "example.txt",
-  "type": "text/plain",
-  "size": 12345
-}
+## Setup Instructions
+```bash
+npm install
 ```
+
+## Run Instructions
+```bash
+npm start
+```
+
+## Example API Endpoints / Usage
+
