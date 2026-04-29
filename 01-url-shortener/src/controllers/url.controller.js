@@ -3,7 +3,11 @@ const urlService = require('../services/url.service');
 const logger = require('../utils/logger');
 
 const urlSchema = z.object({
-  url: z.string().url('Invalid URL format')
+  url: z.string().max(2048).url('Invalid URL format').refine(value => {
+    if (!URL.canParse(value)) return false;
+    const url = new URL(value);
+    return ['http:', 'https:'].includes(url.protocol) && !url.username && !url.password;
+  }, 'Only HTTP(S) URLs without credentials are allowed')
 });
 
 class UrlController {
@@ -11,14 +15,15 @@ class UrlController {
     try {
       const validatedData = urlSchema.parse(req.body);
       const id = urlService.shortenUrl(validatedData.url);
-      const shortUrl = `${process.env.BASE_URL}/${id}`;
+      const baseUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT || 3000}`;
+      const shortUrl = `${baseUrl.replace(/\/$/, '')}/${id}`;
       
-      logger.info(`URL shortened: ${validatedData.url} -> ${shortUrl}`);
+      logger.info(`URL shortened: ${id}`);
       res.status(201).json({ originalUrl: validatedData.url, shortUrl, id });
     } catch (error) {
       if (error instanceof z.ZodError) {
         error.status = 400;
-        error.message = error.errors.map(e => e.message).join(', ');
+        error.message = error.issues.map(e => e.message).join(', ');
       }
       next(error);
     }
@@ -28,7 +33,7 @@ class UrlController {
     try {
       const { id } = req.params;
       const originalUrl = urlService.getOriginalUrl(id);
-      logger.info(`Redirecting ${id} to ${originalUrl}`);
+      logger.info(`Redirecting ${id}`);
       res.redirect(originalUrl);
     } catch (error) {
       next(error);

@@ -1,4 +1,4 @@
-// Simple in-memory model since we don't have a DB specified
+// ponytail: single-process demo; use durable storage before multi-worker deployment.
 const urls = new Map();
 
 module.exports = {

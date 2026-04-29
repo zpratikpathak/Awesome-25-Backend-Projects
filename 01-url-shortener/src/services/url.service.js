@@ -3,7 +3,8 @@ const urlModel = require('../models/url.model');
 
 class UrlService {
   shortenUrl(originalUrl) {
-    const id = crypto.randomBytes(4).toString('hex');
+    let id;
+    do { id = crypto.randomBytes(8).toString('hex'); } while (urlModel.findById(id));
     urlModel.save(id, originalUrl);
     return id;
   }
