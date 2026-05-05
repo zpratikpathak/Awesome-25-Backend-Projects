@@ -1,44 +1,50 @@
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
+from threading import RLock
 from src.models.todo_model import TodoCreate, TodoUpdate, TodoInDB
+
 
 class TodoService:
     def __init__(self):
-        # In-memory database for demonstration
+        # ponytail: single-process demo; use durable storage before multiple workers.
         self._todos = {}
         self._current_id = 1
+        self._lock = RLock()
 
     def get_all(self) -> List[TodoInDB]:
-        return list(self._todos.values())
+        with self._lock:
+            return list(self._todos.values())
 
     def get_by_id(self, todo_id: int) -> Optional[TodoInDB]:
-        return self._todos.get(todo_id)
+        with self._lock:
+            return self._todos.get(todo_id)
 
     def create(self, todo_in: TodoCreate) -> TodoInDB:
-        todo = TodoInDB(
-            id=self._current_id,
-            created_at=datetime.utcnow(),
-            **todo_in.dict()
-        )
-        self._todos[self._current_id] = todo
-        self._current_id += 1
-        return todo
+        with self._lock:
+            todo = TodoInDB(
+                id=self._current_id,
+                created_at=datetime.now(timezone.utc),
+                **todo_in.model_dump()
+            )
+            self._todos[self._current_id] = todo
+            self._current_id += 1
+            return todo
 
     def update(self, todo_id: int, todo_in: TodoUpdate) -> Optional[TodoInDB]:
-        existing_todo = self.get_by_id(todo_id)
-        if not existing_todo:
-            return None
-            
-        update_data = todo_in.dict(exclude_unset=True)
-        updated_todo = existing_todo.copy(update=update_data)
-        self._todos[todo_id] = updated_todo
-        return updated_todo
+        with self._lock:
+            existing_todo = self.get_by_id(todo_id)
+            if not existing_todo:
+                return None
+            updated_todo = TodoInDB.model_validate(
+                {**existing_todo.model_dump(), **todo_in.model_dump(exclude_unset=True)}
+            )
+            self._todos[todo_id] = updated_todo
+            return updated_todo
 
     def delete(self, todo_id: int) -> bool:
-        if todo_id in self._todos:
-            del self._todos[todo_id]
-            return True
-        return False
+        with self._lock:
+            return self._todos.pop(todo_id, None) is not None
+
 
 # Singleton instance
 todo_service = TodoService()

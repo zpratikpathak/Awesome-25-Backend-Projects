@@ -1,0 +1,9 @@
+**
+!Dockerfile
+!requirements.txt
+!main.py
+!smoke.py
+!src/
+!src/**
+**/__pycache__/
+**/.env*
