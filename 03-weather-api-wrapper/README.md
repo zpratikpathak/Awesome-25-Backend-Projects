@@ -1,28 +1,19 @@
-# 03 - Weather API Wrapper
+# 03 — Weather API Wrapper
 
-A robust Weather API wrapper built with Go and the Gin framework.
+<p align="center"><img src="logo.svg" width="160" height="80" alt="Sun and cloud logo"></p>
 
-## Features
-- **Architecture:** Layered pattern (Routes, Controllers, Services, Models).
-- **Validation:** Strict input validation using `go-playground/validator`.
-- **Logging:** Structured logging using `logrus`.
-- **Error Handling:** Centralized error handling middleware.
-- **Environment Support:** Configuration via `godotenv`.
+Go/Gin OpenWeather current weather wrapper. Docker-only commands from this folder:
+```sh
+docker build -t backend03-check .
+docker run --rm -p 8080:8080 backend03-check
+docker run --rm --network none backend03-check go test -count=1 ./...
+```
+Go 1.26, dependency installation, build, and tests stay inside image. Build requires registry access; tests use loopback provider fixtures only. Image excludes `.env`; no credentials supplied. Start command publishes port but supplies no key, so valid-city requests return 502 without contacting provider. Startup verification uses `--network none` and container-local probes. No live provider calls used during verification.
 
-## Setup
+Environment: `OPENWEATHER_API_KEY` required for successful provider requests; optional `PORT` (8080), `ENVIRONMENT=production` (Gin release mode). Optional `.env` supported. Never commit API key.
 
-1. Install dependencies:
-   ```bash
-   go mod tidy
-   ```
+Route: `GET /api/v1/weather?city=London` returns `{"city":"London","temperature":12.5,"description":"cloudy"}`; temperature Celsius. City required, trimmed, 2–100 characters; invalid city returns 400. Missing key, network error, rejected/malformed provider response returns 502. Provider timeout 5 seconds; decoder reads at most 1 MiB. Errors omit key and provider bodies.
 
-2. Environment Setup:
-   Copy `.env.example` to `.env` and add your OpenWeather API key.
+Regression checks use local HTTP fixtures and mocked outbound transport for API success, query encoding, mapping, invalid city, missing key, malformed/empty data, provider rejection, and network failure. Mock key is dummy data. Live OpenWeather path was not tested.
 
-3. Run the Server:
-   ```bash
-   go run main.go
-   ```
-
-## Endpoints
-- `GET /api/v1/weather?city=London`
+Limitations: no cache, cancellation propagation, retries, or rate limiting. Provider quotas apply. Generic 502 errors. No DB required.

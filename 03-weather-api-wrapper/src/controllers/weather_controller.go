@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"strings"
 	"weather-api-wrapper/src/models"
 	"weather-api-wrapper/src/services"
 	"weather-api-wrapper/src/utils"
@@ -13,7 +14,12 @@ func GetWeather(c *gin.Context) {
 	var req models.WeatherRequest
 	if err := c.ShouldBindQuery(&req); err != nil {
 		utils.Logger.Warn("Invalid request parameters: " + err.Error())
-		c.Error(err) // Let the error handler deal with it
+		c.JSON(http.StatusBadRequest, models.APIError{Message: "City must contain 2 to 100 characters"})
+		return
+	}
+	req.City = strings.TrimSpace(req.City)
+	if len([]rune(req.City)) < 2 {
+		c.JSON(http.StatusBadRequest, models.APIError{Message: "City must contain 2 to 100 characters"})
 		return
 	}
 
