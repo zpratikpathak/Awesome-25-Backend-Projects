@@ -3,6 +3,7 @@ const logger = require('../utils/logger');
 
 class ChatService {
   constructor() {
+    // ponytail: single-process history; add shared storage/adapter before multiple workers.
     this.messages = [];
     this.users = new Map();
   }

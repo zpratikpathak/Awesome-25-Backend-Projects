@@ -1,31 +1,27 @@
-# 05 - Simple Chat Server
+# 05 — Simple Chat Server
 
-A real-time chat server built with Node.js, Express, and Socket.io.
+<p align="center"><img src="logo.svg" width="160" height="80" alt="Chat bubbles logo"></p>
 
-## Features
-- **Architecture:** Layered pattern separating Express logic from Socket.io logic.
-- **Validation:** strict incoming message validation using Zod.
-- **Logging:** Structured logging using Winston.
-- **Error Handling:** Centralized Express and Socket error handling.
-- **Environment Support:** Configurable using `.env`.
+Express/Socket.IO global chat. Docker-only commands from this folder:
+```sh
+docker build -t backend05-check .
+docker run --rm -p 3000:3000 backend05-check
+docker run --rm --network none backend05-check npm test
+```
+Node.js 22 and dependencies stay inside image. Build requires registry access; tests use loopback only. Host installations and `.env` excluded; pass configuration with `-e`.
 
-## Setup
+Optional environment: `PORT` (3000), `CORS_ORIGIN` (`*` or one browser origin), `NODE_ENV` (development exposes HTTP error stacks). Optional `.env` supported.
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+## Routes and events
+- `GET /api/health`: `{"status":"UP"}`.
+- Socket.IO endpoint `/socket.io/`; Socket.IO client required, not bare WebSocket messages.
+- Client `join`: trimmed username string, 1–30 characters; letters, numbers, spaces, underscore, hyphen. One join per connection.
+- Client `message`: `{"text":"Hello"}`, trimmed 1–500 characters; unjoined sender `Anonymous`.
+- Server `history`: last 100 messages on connect.
+- Server `message`: `{sender,text,timestamp}` broadcast to everyone.
+- Server `user_joined`/`user_left`: username to other clients.
+- Server `error`: validation failure string.
 
-2. Environment Config:
-   Copy `.env.example` to `.env`.
+Socket payload limit 8192 bytes. Smoke check connects two real Engine.IO polling clients carrying Socket.IO packets. Tests HTTP health, history on connect, invalid/duplicate joins, invalid messages, bidirectional broadcast to sender and peer, disconnect notification, and history retention. No fake socket handlers or live external calls.
 
-3. Run the Server:
-   ```bash
-   npm run start
-   # Or for dev mode:
-   npm run dev
-   ```
-
-## API
-- `GET /api/health` - Check API health status.
-- WebSocket events: `join`, `message`, `history`, `user_joined`, `user_left`.
+Limitations: single-process memory history; restart loses messages. No identity verification, rooms, persistence, rate limiting, or connection quotas. Duplicate names allowed. CORS is not authentication. Clients must render messages as text, not raw HTML. Deploy behind access/abuse controls.

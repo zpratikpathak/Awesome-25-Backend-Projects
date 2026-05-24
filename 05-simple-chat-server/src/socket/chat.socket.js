@@ -3,8 +3,9 @@ const logger = require('../utils/logger');
 const { z } = require('zod');
 
 const messageSchema = z.object({
-  text: z.string().min(1).max(500)
+  text: z.string().trim().min(1).max(500)
 });
+const usernameSchema = z.string().trim().min(1).max(30).regex(/^[\p{L}\p{N}_ -]+$/u);
 
 module.exports = (io) => {
   io.on('connection', (socket) => {
@@ -14,6 +15,10 @@ module.exports = (io) => {
     socket.emit('history', chatService.getRecentMessages());
 
     socket.on('join', (username) => {
+      const parsed = usernameSchema.safeParse(username);
+      if (!parsed.success) return socket.emit('error', 'Invalid username');
+      if (chatService.getUser(socket.id)) return socket.emit('error', 'Already joined');
+      username = parsed.data;
       chatService.addUser(socket.id, username);
       socket.broadcast.emit('user_joined', username);
     });
