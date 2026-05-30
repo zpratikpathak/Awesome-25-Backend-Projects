@@ -4,7 +4,8 @@
   "description": "A professional REST API to upload files and retrieve their metadata. Built with Node.js, Express, and Multer.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "test": "node smoke.js"
   },
   "keywords": [],
   "author": "",
