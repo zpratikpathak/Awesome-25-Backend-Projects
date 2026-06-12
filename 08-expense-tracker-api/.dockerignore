@@ -1,0 +1,9 @@
+.env*
+.git
+target
+*.class
+node_modules
+__pycache__
+.venv
+venv
+*.log

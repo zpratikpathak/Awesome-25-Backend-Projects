@@ -11,11 +11,11 @@ import java.util.UUID;
 public class ExpenseService {
     private final List<Expense> expenses = new ArrayList<>();
 
-    public List<Expense> getAllExpenses() {
-        return expenses;
+    public synchronized List<Expense> getAllExpenses() {
+        return List.copyOf(expenses);
     }
 
-    public Expense addExpense(Expense expense) {
+    public synchronized Expense addExpense(Expense expense) {
         expense.setId(UUID.randomUUID().toString());
         expenses.add(expense);
         return expense;

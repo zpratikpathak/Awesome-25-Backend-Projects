@@ -27,6 +27,6 @@ public class ExpenseController {
 
     @PostMapping
     public ResponseEntity<Expense> create(@Valid @RequestBody Expense expense) {
-        return ResponseEntity.ok(expenseService.addExpense(expense));
+        return ResponseEntity.status(201).body(expenseService.addExpense(expense));
     }
 }
