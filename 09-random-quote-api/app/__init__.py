@@ -3,13 +3,15 @@ from .routes import quote_bp
 from .middlewares.error_handler import register_error_handlers
 import logging
 
+
 def create_app():
     app = Flask(__name__)
-    app.config.from_pyfile('../config.py')
-    
+    app.config.from_pyfile("../config.py")
+    app.config["MAX_CONTENT_LENGTH"] = 16 * 1024
+
     logging.basicConfig(level=logging.INFO)
-    
-    app.register_blueprint(quote_bp, url_prefix='/api')
+
+    app.register_blueprint(quote_bp, url_prefix="/api")
     register_error_handlers(app)
-    
+
     return app
