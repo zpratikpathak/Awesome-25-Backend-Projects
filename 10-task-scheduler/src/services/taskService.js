@@ -1,5 +1,7 @@
 const crypto = require('crypto');
 const tasks = [];
+const cron = require('node-cron');
+const logger = require('../utils/logger');
 
 exports.createTask = (data) => {
     const task = {
@@ -9,6 +11,10 @@ exports.createTask = (data) => {
         status: 'pending'
     };
     tasks.push(task);
+    cron.schedule(task.cron, () => {
+        task.status = 'completed';
+        logger.info(`Executing task ${task.name}`);
+    });
     return task;
 };
 
