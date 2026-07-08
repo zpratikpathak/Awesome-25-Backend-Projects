@@ -1,0 +1,7 @@
+.env*
+.git
+polling
+*.exe
+*.test
+vendor
+*.log
