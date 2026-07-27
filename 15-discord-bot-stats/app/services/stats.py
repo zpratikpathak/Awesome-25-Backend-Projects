@@ -1,1 +1,2 @@
-def get_stats(): return {"servers": 10}
+def get_stats(client):
+    return {"servers": len(client.guilds)}
