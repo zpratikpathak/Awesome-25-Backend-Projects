@@ -1,31 +1,26 @@
-import express from 'express';
-import { exec } from 'child_process';
-import util from 'util';
+const express = require('express');
+const { execFile } = require('node:child_process');
+const { promisify } = require('node:util');
+const { realpath, stat } = require('node:fs/promises');
 
-const execPromise = util.promisify(exec);
+const run = promisify(execFile);
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '4kb' }));
 
+app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 app.post('/metadata', async (req, res) => {
-  const { videoUrl } = req.body;
-  if (!videoUrl) return res.status(400).json({ error: 'videoUrl required' });
-  
+  const { videoUrl } = req.body || {};
+  // ponytail: mounted local media only; remote fetching needs a separate SSRF-safe ingestion boundary.
+  if (typeof videoUrl !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$/.test(videoUrl)) return res.status(400).json({ error: 'videoUrl must be a filename inside /media, not a URL or path' });
   try {
-    // Basic mock extracting metadata using ffprobe if available
-    const command = `ffprobe -v quiet -print_format json -show_format -show_streams "${videoUrl}"`;
-    const { stdout } = await execPromise(command);
+    const file = await realpath(`/media/${videoUrl}`);
+    if (!file.startsWith('/media/') || !(await stat(file)).isFile()) return res.status(400).json({ error: 'Invalid media file' });
+    const { stdout } = await run('ffprobe', ['-v', 'error', '-protocol_whitelist', 'file', '-print_format', 'json', '-show_format', '-show_streams', file], { timeout: 10000, maxBuffer: 1024 * 1024 });
     res.json(JSON.parse(stdout));
   } catch (error) {
-    // Fallback if ffprobe is not installed locally
-    res.json({
-      mockMetadata: true,
-      url: videoUrl,
-      duration: "120s",
-      resolution: "1920x1080",
-      note: "ffprobe command failed or not installed. Showing mock data."
-    });
+    res.status(error.code === 'ENOENT' ? 404 : 422).json({ error: 'Media unavailable or invalid' });
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+if (require.main === module) app.listen(process.env.PORT || 3000);
+module.exports = app;
