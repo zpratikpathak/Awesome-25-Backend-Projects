@@ -13,16 +13,22 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 const greetingProto = grpc.loadPackageDefinition(packageDefinition).greeting;
 
 function sayHello(call, callback) {
+  if (typeof call.request.name !== 'string' || !call.request.name.trim() || call.request.name.length > 100) {
+    callback({ code: grpc.status.INVALID_ARGUMENT, details: 'name must contain 1–100 characters' });
+    return;
+  }
   callback(null, { message: 'Hello ' + call.request.name });
 }
 
 function main() {
-  const server = new grpc.Server();
+  const server = new grpc.Server({ 'grpc.max_receive_message_length': 4096 });
   server.addService(greetingProto.Greeter.service, { sayHello: sayHello });
-  const port = '50051';
-  server.bindAsync(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure(), () => {
+  const port = process.env.PORT || '50051';
+  server.bindAsync(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure(), (error) => {
+    if (error) { console.error(error.message); process.exitCode = 1; return; }
     console.log(`Server running at http://0.0.0.0:${port}`);
   });
 }
 
-main();
+if (require.main === module) main();
+module.exports = { sayHello, greetingProto };

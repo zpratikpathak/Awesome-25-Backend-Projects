@@ -1,7 +1,13 @@
 {
   "name": "22-microservices-communication",
   "version": "1.0.0",
-  "main": "src/index.js",
-  "scripts": { "start": "node src/index.js" },
-  "dependencies": { "express": "^4.18.2", "dotenv": "^16.0.3", "winston": "^3.8.2", "zod": "^3.21.4" }
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node smoke.js"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.14.0",
+    "@grpc/proto-loader": "^0.8.0"
+  }
 }
