@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"io"
 	"net/http"
 	"strings"
 	"sync"
+	"time"
 )
 
 type Document struct {
@@ -27,10 +29,18 @@ func NewIndexer() *Indexer {
 	}
 }
 
-func (idx *Indexer) Add(doc Document) {
+func (idx *Indexer) Add(doc Document) bool {
 	idx.mu.Lock()
 	defer idx.mu.Unlock()
+	if _, exists := idx.documents[doc.ID]; !exists && len(idx.documents) >= 1000 { return false }
 
+	if old, exists := idx.documents[doc.ID]; exists {
+		for _, token := range strings.Fields(strings.ToLower(old)) {
+			ids := idx.invertedIndex[token]
+			for i, id := range ids { if id == doc.ID { ids = append(ids[:i], ids[i+1:]...); break } }
+			if len(ids) == 0 { delete(idx.invertedIndex, token) } else { idx.invertedIndex[token] = ids }
+		}
+	}
 	idx.documents[doc.ID] = doc.Content
 
 	tokens := strings.Fields(strings.ToLower(doc.Content))
@@ -40,6 +50,7 @@ func (idx *Indexer) Add(doc Document) {
 			idx.invertedIndex[token] = append(idx.invertedIndex[token], doc.ID)
 		}
 	}
+	return true
 }
 
 func (idx *Indexer) Search(query string) []Document {
@@ -101,7 +112,8 @@ func main() {
 	http.HandleFunc("/search", handleSearch)
 
 	fmt.Println("Search engine indexer running on :8024")
-	log.Fatal(http.ListenAndServe(":8024", nil))
+	server := &http.Server{Addr: ":8024", ReadHeaderTimeout: 5*time.Second, ReadTimeout: 10*time.Second, WriteTimeout: 10*time.Second, IdleTimeout: 60*time.Second}
+	log.Fatal(server.ListenAndServe())
 }
 
 func handleIndex(w http.ResponseWriter, r *http.Request) {
@@ -110,19 +122,26 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var doc Document
-	if err := json.NewDecoder(r.Body).Decode(&doc); err != nil {
+	decoder := json.NewDecoder(http.MaxBytesReader(w, r.Body, 65536))
+	decoder.DisallowUnknownFields()
+	if err := decoder.Decode(&doc); err != nil {
 		http.Error(w, "Bad request", http.StatusBadRequest)
 		return
 	}
+	var extra interface{}
+	if decoder.Decode(&extra) != io.EOF || strings.TrimSpace(doc.ID) == "" || len(doc.ID) > 128 || strings.TrimSpace(doc.Content) == "" || len(doc.Content) > 32768 {
+		http.Error(w, "Invalid document", 400); return
+	}
 
-	indexer.Add(doc)
+	if !indexer.Add(doc) { http.Error(w, "Index full", 503); return }
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Indexed"))
 }
 
 func handleSearch(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet { http.Error(w, "Method not allowed", 405); return }
 	query := r.URL.Query().Get("q")
-	if query == "" {
+	if strings.TrimSpace(query) == "" || len(query) > 1024 {
 		http.Error(w, "Missing query parameter 'q'", http.StatusBadRequest)
 		return
 	}
