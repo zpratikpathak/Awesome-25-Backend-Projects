@@ -12,25 +12,25 @@ promClient.collectDefaultMetrics({
     prefix: 'node_',
     timeout: 10000,
     gcDurationBuckets: [0.001, 0.01, 0.1, 1, 2, 5],
-    register
+    register: register
 });
 
 // Create a custom histogram metric
 const httpRequestDurationMicroseconds = new promClient.Histogram({
     name: 'http_request_duration_seconds',
-    help: 'Duration of HTTP requests in microseconds',
+    help: 'Duration of HTTP requests in seconds',
+    registers: [register],
     labelNames: ['method', 'route', 'code'],
     buckets: [0.1, 0.3, 0.5, 0.7, 1, 3, 5, 7, 10]
 });
 
 // Register the histogram
-register.registerMetric(httpRequestDurationMicroseconds);
 
 // Middleware to track request duration
 app.use((req, res, next) => {
     const end = httpRequestDurationMicroseconds.startTimer();
     res.on('finish', () => {
-        end({ route: req.path, code: res.statusCode, method: req.method });
+        end({ route: req.route ? req.route.path : 'unmatched', code: res.statusCode, method: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'].includes(req.method) ? req.method : 'OTHER' });
     });
     next();
 });
@@ -56,12 +56,13 @@ app.get('/metrics', async (req, res) => {
         res.set('Content-Type', register.contentType);
         res.end(await register.metrics());
     } catch (ex) {
-        res.status(500).end(ex);
+        res.status(500).end('Metrics unavailable');
     }
 });
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
+if (require.main === module) app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     console.log(`Metrics are available at http://localhost:${PORT}/metrics`);
 });
+module.exports = app;
